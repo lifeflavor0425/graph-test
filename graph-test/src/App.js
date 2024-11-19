@@ -25,9 +25,8 @@ function App() {
   };
 
   const onClick = () => {
-    console.log(requestUrl);
     requestFun();
-    return requestUrl.current++;
+    return ++requestUrl.current;
   };
 
   return (
