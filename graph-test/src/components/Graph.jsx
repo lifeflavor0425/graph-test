@@ -1,67 +1,33 @@
 import React, {
-  useMemo,
-  useRef,
   useState,
   useEffect,
-  useCallback,
 } from "react";
-import {
-  LineChart,
-  Line,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-} from "recharts";
+
 import ChartJS from "./ChartJS";
+import ChartJS2 from "./ChartJs2";
+import Rechart from "./Rechart";
 
-const Graph = function Graph({ props }) {
-  const [pokemon, setPokemon] = useState([]);
+const Graph = React.memo(({ props }) => {
 
-  useMemo(() => {
-    const dataArr = [];
-    props.map((poke, idx) => {
-      const data = { name: poke.name, idx: idx, atk: poke.atk };
-      dataArr.push(data);
-    });
-    return setPokemon(dataArr);
-  }, [props]);
 
-  const defaultData = [
-    { name: "Page A", y: 400, x: 1000, atk: 400 },
-    { name: "Page B", y: 300, x: 2000, atk: 600 },
-    { name: "Page C", y: 200, x: 3000, atk: 100 },
-    { name: "Page D", y: 100, x: 4000, atk: 400 },
-    { name: "Page E", y: 200, x: 5000, atk: 600 },
-  ];
-  
   return (
     <div>
       {/* {Rechart} */}
       <div>
-        {pokemon !== null && (
-          <LineChart
-            width={600}
-            height={300}
-            data={pokemon}
-            margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
-          >
-            <Line type="monotone" dataKey="atk" stroke="#8884d8" />
-            <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-          </LineChart>
-        )}
+        <Rechart props={props}/>
       </div>
 
       {/* {Chart.js} */}
-      <div style={{height : 300}}>
-         <ChartJS props={pokemon}/>
+      <div>
+         <ChartJS props={props}/>
+      </div>
+      {/* Chart.JS-2 */}
+      <div>
+        <ChartJS2 props={props}/>
       </div>
     </div>
   );
-};
+});
 
 // xAxis custom - > tick={renderCustomAxisTick}
 /*

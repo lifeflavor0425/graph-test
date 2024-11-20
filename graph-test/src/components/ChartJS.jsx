@@ -2,8 +2,8 @@ import React, {
     useRef,
     useState,
     useEffect,
-    useCallback,
     useMemo,
+    memo,
   } from "react";
 import {
     Chart,
@@ -14,7 +14,7 @@ import {
     LineElement,
   } from "chart.js";
 
-const ChartJS = ({props}) => {
+const ChartJS = memo(({props}) => {
     const chartRef = useRef(null);
     let chartInstance = null;
     const [labels, setlabels] = useState([]);
@@ -30,6 +30,7 @@ const ChartJS = ({props}) => {
       }, [props]);
 
     useEffect(() => {
+        console.log("---ChartJS---")
         const ctx = chartRef.current.getContext("2d");
         const createChart = () => {
         Chart.register(
@@ -60,15 +61,15 @@ const ChartJS = ({props}) => {
             ],
             },
             options: {
-            scales: {
-                x: {
-                display: true,
+                scales: {
+                    x: {
+                    display: true,
+                    },
+                    y: {
+                    beginAtZero: true,
+                    //max: 100, // 최대값 설정
+                    },
                 },
-                y: {
-                beginAtZero: true,
-                //max: 100, // 최대값 설정
-                },
-            },
             },
         });
         };
@@ -95,6 +96,6 @@ const ChartJS = ({props}) => {
     }, [props]);
 
     return <canvas ref={chartRef} />;
-  };
+  });
 
   export default ChartJS
