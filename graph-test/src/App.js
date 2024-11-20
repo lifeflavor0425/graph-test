@@ -10,7 +10,7 @@ function App() {
     { name: "Page D", y: 100, x: 4000, atk: 400 },
     { name: "Page E", y: 200, x: 5000, atk: 600 },
   ])
-  
+
   const requestUrl = useRef(0);
   const url = `http://localhost:8000/get_data`;
 
@@ -33,7 +33,7 @@ function App() {
         setgetData(dataArr);
       });
   };
-
+//
   const onClick = () => {
     requestFun();
     return ++requestUrl.current;
