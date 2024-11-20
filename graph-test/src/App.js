@@ -38,7 +38,7 @@ function App() {
     requestFun();
     return ++requestUrl.current;
   };
-
+//
   return (
     <div className="App">
       <h1>requset count {requestUrl.current}</h1>
